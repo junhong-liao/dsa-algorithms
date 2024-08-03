@@ -7,6 +7,9 @@ tree = build(nodes)
 
 # Pretty print the tree
 pprint(tree)
+
+TREE VISUALIZER: https://solomk.in/leetcode-tree-visualizer
+
 '''
 # binary tree node definition
 class TreeNode:
