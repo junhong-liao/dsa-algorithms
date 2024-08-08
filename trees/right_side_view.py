@@ -41,8 +41,7 @@ def rightSideView(root: Optional[TreeNode]) -> List[int]:
     res, q = list(), deque()
     if root: q.append(root)
     while q:
-        length = len(q)
-        target = None
+        length, target = len(q), None
         for i in range(length):
             target = q.popleft()
             if target.left: q.append(target.left)
