@@ -12,6 +12,19 @@ class TreeOperations():
         root.right = self.buildTree(arr, 2 * index + 2)
         return root
 
+    def kthSmallestElement(self, root: Optional[TreeNode], k: int) -> int:
+        res, q = list(), deque()
+        if root: q.append(root)
+        while q:
+            level, length = list(), len(q)
+            for i in range(length):
+                node = q.popleft()
+                level.append(node.val)
+                if node.left: q.append(node.left)
+                if node.right: q.append(node.right)
+            res.append(level)
+        return [x for x in level for level in res][k - 1]
+
     # invert a binary tree
     def invert(self, node: Optional[TreeNode]) -> Optional[TreeNode]:
         if not node: return None
@@ -70,8 +83,8 @@ class TreeOperations():
             if not root: return
             if root.val >= currentMax: res[0] += 1
             currentMax = max(currentMax, root.val)
-            dfs(root.left)
-            dfs(root.right)
+            dfs(root.left, currentMax)
+            dfs(root.right, currentMax)
         dfs(root)
         return res[0]
 
