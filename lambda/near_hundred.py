@@ -1,0 +1,1 @@
+near_hundred = lambda n: True if abs(100 - n) <= 10 or abs(200 - n) <= 10 else False
