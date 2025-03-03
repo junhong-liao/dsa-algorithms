@@ -7,6 +7,5 @@ def isAnagram(s: str, t: str) -> bool:
     return sMap == tMap
 
 import collections
-
 def isAnagramOptimized(s: str, t: str) -> bool:
     return collections.Counter(s) == collections.Counter(t)
