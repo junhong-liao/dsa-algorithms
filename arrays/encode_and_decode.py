@@ -7,15 +7,15 @@ decode:
 * extract string, add to result
 '''
 
+# initial
 class Solution:
     def encode(self, strs: List[str]) -> str:
-        res = ""
-        for s in strs: res += "#" + str(len(s)) + "#" + s
-        return res
+        # this results in o(n^2) time
+        # res += "#" + str(len(s)) + "#" + s
+        return "".join(f"#{len(s)}#{s}" for s in strs)
 
     def decode(self, s: str) -> List[str]:
-        res = list()
-        i = 0
+        res, i = list(), 0
         while i < len(s):
             if s[i] == "#":
                 i += 1
@@ -29,3 +29,17 @@ class Solution:
                 i += length
         return res
 
+# optimal
+class Solution:
+    def encode(self, strs: List[str]) -> str:
+        return ''.join(f"{len(s)}:{s}" for s in strs)
+
+    def decode(self, s: str) -> List[str]:
+        res, i = list(), 0
+        while i < len(s):
+            j = s.find(":", i) # index of next instance of colon delimiter
+            length = int(s[i:j])
+            i = j + 1
+            res.append(s[i : i + length])
+            i += length
+        return res
