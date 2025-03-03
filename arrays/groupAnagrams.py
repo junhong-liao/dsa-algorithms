@@ -9,8 +9,6 @@ def groupAnagrams(strs: List[str]) -> List[List[str]]:
         mem[tuple(count)].append(s)
     return mem.values()
 
-
-
 '''
 Group anagrams together into sublists
 
@@ -19,8 +17,6 @@ anagram: string containing exact same chars as another wrt ordering
 approach:
 
 since we have only lowercase english letters, we can use 26-length arrays
-
-
 
 '''
 
