@@ -1,0 +1,1 @@
+sleep_in = lambda weekday, vacation: True if not weekday or vacation else False
