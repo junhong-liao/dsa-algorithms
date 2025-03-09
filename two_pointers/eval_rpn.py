@@ -5,6 +5,10 @@ Else, just append the number as an integer. If you convert to int here, you can 
 Lesson: if you can clean the data when you input the data, do so
 '''
 
+
+from typing import List
+import operator
+
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
         operands = set(["*", "-", "+", "/"])
@@ -16,5 +20,15 @@ class Solution:
                 elif t == '-': res.append(a - b)
                 elif t == '*': res.append(a * b)
                 else: res.append(int(a / b))
+            else: res.append(int(t))
+        return res[0]
+    
+    def evalOptimized(self, tokens: List[str]) -> int:
+        operators = {"+" : operator.add, "-" : operator.sub, "*" : operator.mul, "/" : lambda a, b: int(operator.truediv(a, b))}
+        res = list()
+        for t in tokens:
+            if t in operators:
+                b, a = res.pop(), res.pop()
+                res.append(operators[t](a, b))
             else: res.append(int(t))
         return res[0]
