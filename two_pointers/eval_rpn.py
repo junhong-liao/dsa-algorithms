@@ -23,12 +23,14 @@ class Solution:
             else: res.append(int(t))
         return res[0]
     
-    def evalOptimized(self, tokens: List[str]) -> int:
-        operators = {"+" : operator.add, "-" : operator.sub, "*" : operator.mul, "/" : lambda a, b: int(operator.truediv(a, b))}
-        res = list()
-        for t in tokens:
-            if t in operators:
-                b, a = res.pop(), res.pop()
-                res.append(operators[t](a, b))
-            else: res.append(int(t))
-        return res[0]
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        operands = {'+' : operator.add, '-' : operator.sub, 
+                    '*' : operator.mul, '/' : operator.truediv}
+        result = list()
+        for token in tokens:
+            if token in operands:
+                b, a = result.pop(), result.pop()
+                result.append(int(operands[token](a, b)))
+            else: result.append(int(token))
+        return result[0]
