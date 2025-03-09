@@ -23,10 +23,15 @@ class Solution:
             else: res.append(int(t))
         return res[0]
     
+# key insight here is you can map str to functions and call
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
-        operands = {'+' : operator.add, '-' : operator.sub, 
-                    '*' : operator.mul, '/' : operator.truediv}
+        operands = {
+            '+' : operator.add,
+            '-' : operator.sub,
+            '*' : operator.mul,
+            '/' : operator.truediv
+        }
         result = list()
         for token in tokens:
             if token in operands:
