@@ -1,5 +1,6 @@
 from typing import List
 
+# initial
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         low, high = 0, len(matrix) - 1
@@ -23,8 +24,31 @@ class Solution:
                     left = mid + 1
                 else: return True
             return False
+    
+# leetcode
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        low, high = 0, len(matrix) - 1
+        def search(nums: List[int]) -> bool:
+            left, right = 0, len(nums) - 1
+            while left <= right:
+                mid = left + (right - left) // 2
+                if nums[mid] > target: right = mid - 1
+                elif nums[mid] < target: left = mid + 1
+                else: return True
+            return False
 
-matrix = [[1,2,4,8],[10,11,12,13],[14,20,30,40]]
-target = 40
-s = Solution()
-print(s.searchMatrix(matrix, target))
+        while low <= high:
+            mid = low + (high - low) // 2
+            if search(matrix[mid]): return True
+            if matrix[mid][0] > target: high = mid - 1
+            elif matrix[mid][len(matrix[mid]) - 1] < target: low = mid + 1
+            else: return False
+        return False
+
+
+
+# matrix = [[1,2,4,8],[10,11,12,13],[14,20,30,40]]
+# target = 40
+# s = Solution()
+# print(s.searchMatrix(matrix, target))
