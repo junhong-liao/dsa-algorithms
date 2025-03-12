@@ -1,21 +1,19 @@
-class Solution:
-    def search(self, nums: list[int], target: int) -> int:
-        low, high = 0, len(nums) - 1
-        while low < high:
-            mid = (low + high) // 2
-            if nums[mid] == target:
-                return mid
-            elif nums[mid] > target:
-                high = mid
-            else:
-                low = mid
-        return -1
-    
-def main():
-    arr = [-1,0,3,5,9,12]
-    target = 9
-    s = Solution()
-    res = s.search(arr, target)
-    print(res)
+from typing import List
 
-main()
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = left + (right - left) // 2
+            if nums[mid] > target: right = mid - 1
+            elif nums[mid] < target: left = mid + 1
+            else: return mid
+        return -1
+   
+    def search(self, nums: List[int], target: int) -> int:
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            if nums[left + (right - left) // 2] > target: right = left + (right - left) // 2 - 1
+            elif nums[left + (right - left) // 2] < target: left = left + (right - left) // 2 + 1
+            else: return left + (right - left) // 2
+        return -1
