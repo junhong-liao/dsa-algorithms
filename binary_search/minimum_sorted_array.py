@@ -1,23 +1,22 @@
 import math
 from typing import List
 
-# remember to draw this one out. visuals are incredibly helpful here.
 
-# class Solution:
-#     def findMin(self, nums: List[int]) -> int:
-#         left, right = 0, len(nums) - 1
-#         res = math.inf
-#         while left <= right:
-#             mid = left + (right - left) // 2
-#             res = min(res, nums[mid])
-#             if nums[right] > nums[left]:
-#                 res = min(res, nums[left])
-#                 right = mid - 1
-#             elif nums[mid] > nums[left]: 
-#                 left = mid + 1
-#             else: 
-#                 right = mid - 1
-#         return res
+# pure intuitive approach
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        left, right = 0, len(nums) - 1
+        res = math.inf
+        while left <= right:
+            mid = left + (right - left) // 2
+            res = min(nums[mid], res)
+            # mid is in the left sorted array
+            if nums[left] <= nums[mid]:
+                res = min(nums[left], res) # nums[left] is the smallest value in this sorted subarray. check it then skip the rest.
+                left = mid + 1
+            else:
+                right = mid - 1
+        return res
 
 # final solution
 class Solution:
